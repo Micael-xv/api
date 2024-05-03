@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/config';
-import Usuario from './Usuario';
+import Campaigns from './Campaigns';
 
-const Elemento = sequelize.define(
-  'elemento',
+const Maps = sequelize.define(
+  'maps',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -15,16 +15,13 @@ const Elemento = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    descricao: {
+
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    img: {
+    cover: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    publico: {
-      type: DataTypes.BOOLEAN,
       allowNull: false,
     },
   },
@@ -32,18 +29,20 @@ const Elemento = sequelize.define(
     freezeTableName: true,
     timestamps: true,
     createdAt: 'created_at',
-    updatedAt: 'createdAt',
+    updatedAt: 'updated_at',
   },
 
 );
-Elemento.belongsTo(Usuario, {
-  as: 'usuario',
+
+Maps.belongsTo(Campaigns, {
+  as: 'campaigns',
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {
-    field: 'id_entrega',
-    name: 'idEntrega',
+    field: 'id_campaing',
+    name: 'idCampaing',
     allowNull: false,
   },
 });
-export default Elemento;
+
+export default Maps;

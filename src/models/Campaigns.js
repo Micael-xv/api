@@ -2,8 +2,8 @@ import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/config';
 import Usuario from './Usuario';
 
-const Elemento = sequelize.define(
-  'elemento',
+const Campaigns = sequelize.define(
+  'campaigns',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,20 +11,21 @@ const Elemento = sequelize.define(
       autoIncrement: true,
     },
 
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    descricao: {
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    img: {
+    sistem: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    publico: {
-      type: DataTypes.BOOLEAN,
+    started: {
+      field: 'started_at',
+      type: DataTypes.TEXT,
       allowNull: false,
     },
   },
@@ -32,18 +33,20 @@ const Elemento = sequelize.define(
     freezeTableName: true,
     timestamps: true,
     createdAt: 'created_at',
-    updatedAt: 'createdAt',
+    updatedAt: 'updated_at',
   },
 
 );
-Elemento.belongsTo(Usuario, {
-  as: 'usuario',
+
+Campaigns.belongsTo(Usuario, {
+  as: 'idMaster',
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {
-    field: 'id_entrega',
-    name: 'idEntrega',
+    field: 'id_usuario',
+    name: 'idUsuario',
     allowNull: false,
   },
 });
-export default Elemento;
+
+export default Campaigns;

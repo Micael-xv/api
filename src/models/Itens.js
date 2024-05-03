@@ -2,8 +2,8 @@ import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/config';
 import Usuario from './Usuario';
 
-const Elemento = sequelize.define(
-  'elemento',
+const Itens = sequelize.define(
+  'itens',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -15,16 +15,17 @@ const Elemento = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    descricao: {
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    img: {
-      type: DataTypes.STRING,
+    price: {
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
-    publico: {
-      type: DataTypes.BOOLEAN,
+    publicos: {
+      field: 'public',
+      type: DataTypes.NUMBER,
       allowNull: false,
     },
   },
@@ -32,11 +33,11 @@ const Elemento = sequelize.define(
     freezeTableName: true,
     timestamps: true,
     createdAt: 'created_at',
-    updatedAt: 'createdAt',
+    updatedAt: 'updated_at',
   },
 
 );
-Elemento.belongsTo(Usuario, {
+Itens.belongsTo(Usuario, {
   as: 'usuario',
   onDelete: 'no action',
   onUpdate: 'no action',
@@ -46,4 +47,4 @@ Elemento.belongsTo(Usuario, {
     allowNull: false,
   },
 });
-export default Elemento;
+export default Itens;

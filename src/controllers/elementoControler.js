@@ -1,4 +1,4 @@
-/* eslint-disable no-return-assign */
+/* eslint-disable quotes */
 import Elemento from "../models/Elemento";
 
 const get = async (req, res) => {
@@ -41,14 +41,14 @@ const get = async (req, res) => {
 };
 
 const create = async (dados, res) => {
-  const {name, descricao, img, publico, usuario } = dados;
+  const { name, descricao, img, publico, idUsuario } = dados;
 
   const response = await Elemento.create({
-    fistname,
-    lastname,
-    email,
-    number,
-    passwordHash,
+    name,
+    descricao,
+    img,
+    publico,
+    idUsuario,
 });
 
   return res.status(200).send({
