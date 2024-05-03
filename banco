@@ -1,0 +1,95 @@
+create table usuario(
+    id serial primary key,
+    firstname varchar,
+    lastname varchar,
+    email varchar,
+    number int,
+    password_hash text
+);
+
+create table elemento (
+    id serial primary key,
+    name varchar,
+    descricao varchar,
+    img varchar,
+    publico boolean,
+    usuario int references usuario(id)
+);
+
+create table campaigns (
+    id serial primary key,
+    title varchar,
+    description varchar,
+    sistem varchar,
+    started_at text,
+    idMaster int references usuario(id)
+);
+
+create table itens(
+    id serial primary key,
+    name varchar,
+    description varchar,
+    img varchar,
+    price float,
+    public int,
+    creator int references usuario(id)
+);
+
+create table campaignItens(
+    id serial primary key,
+    id_item int references itens(id),
+    campaign_item int references campaigns(id)
+);
+
+create table sheets(
+    id serial primary key,
+    name varchar,
+    hp_max int,
+    hp int,
+    shild int,
+    agility varchar,
+    strength float,
+    inteligence int,
+    vigor int,
+    class varchar,
+    owner int references usuario(id),
+    id_campaigns int references campaigns(id)
+);
+
+create table inventory (
+    id serial primary key,
+    amount int,
+    owner int references sheets(id),
+    item int references itens(id)
+);
+
+create table maps (
+    id serial primary key,
+    name varchar,
+    description varchar,
+    cover varchar,
+    id_campaing int references campaigns(id)
+);
+
+create table mapElements (
+    id serial primary key,
+    posicaoX int,
+    posicaoY int,
+    altura float,
+    largura float,
+    z_index int,
+    rotate int,
+    idElemento int references elemento(id),
+    id_map int references maps(id)
+);
+
+create table npcs (
+    id serial primary key,
+    name varchar,
+    age int,
+    gender varchar,
+    appearence varchar,
+    temper varchar,
+    id_campaign int references campaigns(id),
+    map_element int references mapElements(id)
+);
