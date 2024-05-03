@@ -1,43 +1,46 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/config';
 
-const Address = sequelize.define(
-  'address',
+const Usuario = sequelize.define(
+  'usuario',
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    country: {
-      type: DataTypes.STRING(50),
+
+    firstname: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    state: {
-      type: DataTypes.STRING(50),
+    lastname: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    city: {
-      type: DataTypes.STRING(50),
+    email: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    neighborhood: {
-      type: DataTypes.STRING(50),
+    number: {
+      type: DataTypes.NUMBER,
       allowNull: false,
     },
-    street: {
-      type: DataTypes.STRING(50),
+    passwordHash: {
+      field: 'password_hash',
+      type: DataTypes.TEXT,
       allowNull: false,
     },
-    postalCode: {
-      field: 'postal_code',
-      type: DataTypes.FLOAT(8, 0),
-    },
+
   },
+
   {
     freezeTableName: true,
     timestamps: false,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
   },
+
 );
 
-export default Address;
+export default Usuario;

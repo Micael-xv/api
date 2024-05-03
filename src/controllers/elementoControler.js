@@ -1,11 +1,12 @@
-import AdressModel from '../models/AddressModel';
+/* eslint-disable no-return-assign */
+import Elemento from "../models/Elemento";
 
 const get = async (req, res) => {
   try {
     const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
 
     if (!id) {
-      const response = await AdressModel.findAll({
+      const response = await Elemento.findAll({
         order: [['id', 'asc']],
       });
       return res.status(200).send({
@@ -15,7 +16,7 @@ const get = async (req, res) => {
       });
     }
 
-    const response = await AdressModel.findOne({ where: { id } });
+    const response = await Elemento.findOne({ where: { id } });
 
     if (!response) {
       return res.status(200).send({
@@ -40,18 +41,15 @@ const get = async (req, res) => {
 };
 
 const create = async (dados, res) => {
-  const {
-    country, state, city, neighborhood, street, postalCode,
-  } = dados;
+  const {name, descricao, img, publico, usuario } = dados;
 
-  const response = await AdressModel.create({
-    country,
-    state,
-    city,
-    neighborhood,
-    street,
-    postalCode,
-  });
+  const response = await Elemento.create({
+    fistname,
+    lastname,
+    email,
+    number,
+    passwordHash,
+});
 
   return res.status(200).send({
     type: 'success',
@@ -61,7 +59,7 @@ const create = async (dados, res) => {
 };
 
 const update = async (id, dados, res) => {
-  const response = await AdressModel.findOne({ where: { id } });
+  const response = await Elemento.findOne({ where: { id } });
 
   if (!response) {
     return res.status(200).send({
@@ -110,7 +108,7 @@ const destroy = async (req, res) => {
       });
     }
 
-    const response = await AdressModel.findOne({ where: { id } });
+    const response = await Elemento.findOne({ where: { id } });
 
     if (!response) {
       return res.status(200).send({

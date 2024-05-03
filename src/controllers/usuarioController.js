@@ -1,12 +1,14 @@
-import institutionModel from '../models/InstitutionModel';
+/* eslint-disable no-return-assign */
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import Usuario from '../models/Usuario';
 
 const get = async (req, res) => {
-    
   try {
     const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
 
     if (!id) {
-      const response = await institutionModel.findAll({
+      const response = await Usuario.findAll({
         order: [['id', 'asc']],
       });
       return res.status(200).send({
@@ -16,7 +18,7 @@ const get = async (req, res) => {
       });
     }
 
-    const response = await institutionModel.findOne({ where: { id } });
+    const response = await Usuario.findOne({ where: { id } });
 
     if (!response) {
       return res.status(200).send({
@@ -41,9 +43,17 @@ const get = async (req, res) => {
 };
 
 const create = async (dados, res) => {
-  const { name,document_number, address_id } = dados;
+  const {
+    fistname, lastname, email, number, passwordHash,
+  } = dados;
 
-  const response = await institutionModel.create({name,document_number, address_id});
+  const response = await Usuario.create({
+    fistname,
+    lastname,
+    email,
+    number,
+    passwordHash,
+  });
 
   return res.status(200).send({
     type: 'success',
@@ -53,7 +63,7 @@ const create = async (dados, res) => {
 };
 
 const update = async (id, dados, res) => {
-  const response = await institutionModel.findOne({ where: { id } });
+  const response = await Usuario.findOne({ where: { id } });
 
   if (!response) {
     return res.status(200).send({
@@ -102,7 +112,7 @@ const destroy = async (req, res) => {
       });
     }
 
-    const response = await institutionModel.findOne({ where: { id } });
+    const response = await Usuario.findOne({ where: { id } });
 
     if (!response) {
       return res.status(200).send({
@@ -127,8 +137,78 @@ const destroy = async (req, res) => {
   }
 };
 
+const register = async (req, res) => {
+  try {
+    const {
+      email, password, firstname, lastname, number,
+    } = req.body;
+    const response = await Usuario.findOne({
+      where: {
+        email,
+      },
+    });
+    if (response) {
+      throw Error('Username já foi utilizado!');
+    }
+    const passwordHash = await bcrypt.hash(password, 10);
+    const resposta = await Usuario.create({
+      firstname,
+      lastname,
+      number,
+      email,
+      passwordHash,
+    });
+    return res.status(201).send({
+      message: 'Criado!',
+      response: resposta,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: 'Ops!',
+      response: error.message,
+    });
+  }
+};
+
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await Usuario.findOne({
+      where: {
+        email,
+      },
+    });
+    if(!user) {
+      throw new Error('Usuario ou senha invalidos!');
+    };
+
+
+    const passwordHash = user.passwordHash;
+
+    const resposta = await bcrypt.compare(password, passwordHash);
+
+    if (resposta) {
+      const token = jwt.sign({userId: user.id, userName: user.name }, process.env.SECRET_KEY, { algorithm: 'ES256', expires: '1h' });
+      return res.status(200).send({
+        token,
+      });
+    }
+
+    return res.status(400).send({
+      message: 'Usuario ou senha inválidos!',
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: 'Ops!',
+      response: error.message,
+    });
+  }
+};
+
 export default {
   get,
   persist,
   destroy,
+  register,
+  login,
 };

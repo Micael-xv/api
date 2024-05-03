@@ -1,9 +1,8 @@
-import adressRoute from './addressRoute';
-import institutionRoute from './institutionRoute';
+// eslint-disable-next-line quotes
+import usuarioRoute from "./usuarioRoute";
 
 function Routes(app) {
-  institutionRoute(app)
-  adressRoute(app);
+  usuarioRoute(app);
 }
 
 export default Routes;
