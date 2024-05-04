@@ -56,7 +56,7 @@ const create = async (dados, res) => {
     price,
     publicos,
     creator,
-});
+  });
 
   return res.status(200).send({
     type: 'success',

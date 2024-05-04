@@ -1,4 +1,3 @@
-/* eslint-disable no-return-assign */
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import Usuario from '../models/Usuario';
@@ -44,7 +43,8 @@ const get = async (req, res) => {
 
 const create = async (dados, res) => {
   const {
-    fistname, lastname, email, number, passwordHash} = dados;
+    fistname, lastname, email, number, passwordHash 
+  } = dados;
 
   const response = await Usuario.create({
     fistname,
@@ -177,17 +177,16 @@ const login = async (req, res) => {
         email,
       },
     });
-    if(!user) {
+    if (!user) {
       throw new Error('Usuario ou senha invalidos!');
-    };
-
+    }
 
     const passwordHash = user.passwordHash;
 
     const resposta = await bcrypt.compare(password, passwordHash);
 
     if (resposta) {
-      const token = jwt.sign({userId: user.id, userName: user.name }, process.env.SECRET_KEY, { algorithm: 'ES256', exp: '1h' });
+      const token = jwt.sign({ userId: user.id, userName: user.name }, process.env.SECRET_KEY, { algorithm: 'ES256', exp: '1h' });
       return res.status(200).send({
         token,
       });

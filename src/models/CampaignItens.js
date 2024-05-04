@@ -21,7 +21,7 @@ const CampaignItens = sequelize.define(
 
 );
 CampaignItens.belongsTo(Itens, {
-  as: 'usuario',
+  as: 'itens',
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {
@@ -37,7 +37,7 @@ CampaignItens.belongsTo(Campaigns, {
   onUpdate: 'no action',
   foreignKey: {
     field: 'campaign_item',
-    name: 'campaignItem',
+    name: 'idCampaignItem',
     allowNull: false,
   },
 });

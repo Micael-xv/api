@@ -13,7 +13,7 @@ create table elemento (
     descricao varchar,
     img varchar,
     publico boolean,
-    usuario int references usuario(id)
+    id_usuario int references usuario(id)
 );
 
 create table campaigns (

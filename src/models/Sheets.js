@@ -25,6 +25,10 @@ const Sheets = sequelize.define(
       type: DataTypes.Number,
       allowNull: false,
     },
+    shild: {
+      type: DataTypes.NUMBER,
+      allowNull: false,
+    },
     agility: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -58,12 +62,12 @@ const Sheets = sequelize.define(
 );
 
 Sheets.belongsTo(Usuario, {
-  as: 'idMaster',
+  as: 'Usuario',
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {
-    field: 'id_usuario',
-    name: 'idUsuario',
+    field: 'owner',
+    name: 'idOwner',
     allowNull: false,
   },
 });

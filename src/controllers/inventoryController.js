@@ -1,5 +1,5 @@
 /* eslint-disable no-return-assign */
-import Itens from "../models/Itens";
+import Itens from '../models/Itens';
 
 const get = async (req, res) => {
   try {
@@ -47,7 +47,7 @@ const create = async (dados, res) => {
     amount,
     owner,
     item,
-});
+  });
 
   return res.status(200).send({
     type: 'success',

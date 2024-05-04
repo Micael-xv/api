@@ -1,5 +1,4 @@
-/* eslint-disable no-return-assign */
-import Maps from "../models/Maps";
+import Maps from '../models/Maps';
 
 const get = async (req, res) => {
   try {
@@ -51,7 +50,7 @@ const create = async (dados, res) => {
     temper,
     idCampaign,
     mapElement,
-});
+  });
 
   return res.status(200).send({
     type: 'success',

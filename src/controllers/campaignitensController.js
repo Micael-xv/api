@@ -1,5 +1,4 @@
-// eslint-disable-next-line quotes
-import CampaignItens from "../models/CampaignItens";
+import CampaignItens from '../models/CampaignItens';
 
 const get = async (req, res) => {
   try {
@@ -46,7 +45,7 @@ const create = async (dados, res) => {
   const response = await CampaignItens.create({
     idItens,
     Campaigns,
-});
+  });
 
   return res.status(200).send({
     type: 'success',

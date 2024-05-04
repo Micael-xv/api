@@ -1,5 +1,5 @@
 /* eslint-disable no-return-assign */
-import MapElements from "../models/MapElements";
+import MapElements from '../models/MapElements';
 
 const get = async (req, res) => {
   try {
@@ -41,7 +41,16 @@ const get = async (req, res) => {
 };
 
 const create = async (dados, res) => {
-  const { posicaoX, posicaoY, altura, largura, zindex, rotate, idElementos, idMap } = dados;
+  const {
+    posicaoX,
+    posicaoY,
+    altura,
+    largura,
+    zindex,
+    rotate,
+    idElementos,
+    idMap,
+  } = dados;
 
   const response = await MapElements.create({
     posicaoX,
@@ -52,7 +61,7 @@ const create = async (dados, res) => {
     rotate,
     idElementos,
     idMap,
-});
+  });
 
   return res.status(200).send({
     type: 'success',

@@ -43,8 +43,8 @@ Campaigns.belongsTo(Usuario, {
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {
-    field: 'id_usuario',
-    name: 'idUsuario',
+    field: 'idMaster',
+    name: 'idMasterUser',
     allowNull: false,
   },
 });

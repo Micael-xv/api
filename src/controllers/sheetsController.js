@@ -1,12 +1,12 @@
 /* eslint-disable no-return-assign */
-import Elemento from "../models/Elemento";
+import Sheets from '../models/Sheets';
 
 const get = async (req, res) => {
   try {
     const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
 
     if (!id) {
-      const response = await Elemento.findAll({
+      const response = await Sheets.findAll({
         order: [['id', 'asc']],
       });
       return res.status(200).send({
@@ -16,7 +16,7 @@ const get = async (req, res) => {
       });
     }
 
-    const response = await Elemento.findOne({ where: { id } });
+    const response = await Sheets.findOne({ where: { id } });
 
     if (!response) {
       return res.status(200).send({
@@ -43,10 +43,10 @@ const get = async (req, res) => {
 const create = async (dados, res) => {
   const {
     name, hpMax, hp, shild, agility, strenghth,
-    inteligence, vigor, classe, owner, idCampaigns,
+    inteligence, vigor, classe, idOwner, idCampaigns,
   } = dados;
 
-  const response = await Elemento.create({
+  const response = await Sheets.create({
     name,
     hpMax,
     hp,
@@ -56,9 +56,9 @@ const create = async (dados, res) => {
     inteligence,
     vigor,
     classe,
-    owner,
+    idOwner,
     idCampaigns,
-});
+  });
 
   return res.status(200).send({
     type: 'success',
@@ -68,7 +68,7 @@ const create = async (dados, res) => {
 };
 
 const update = async (id, dados, res) => {
-  const response = await Elemento.findOne({ where: { id } });
+  const response = await Sheets.findOne({ where: { id } });
 
   if (!response) {
     return res.status(200).send({
@@ -117,7 +117,7 @@ const destroy = async (req, res) => {
       });
     }
 
-    const response = await Elemento.findOne({ where: { id } });
+    const response = await Sheets.findOne({ where: { id } });
 
     if (!response) {
       return res.status(200).send({

@@ -1,5 +1,5 @@
 /* eslint-disable no-return-assign */
-import Campaigns from "../models/Campaigns";
+import Campaigns from '../models/Campaigns';
 
 const get = async (req, res) => {
   try {
@@ -41,7 +41,13 @@ const get = async (req, res) => {
 };
 
 const create = async (dados, res) => {
-  const { title, description, sistem, started, idMaster } = dados;
+  const {
+    title,
+    description,
+    sistem,
+    started,
+    idMaster,
+  } = dados;
 
   const response = await Campaigns.create({
     title,
@@ -49,7 +55,7 @@ const create = async (dados, res) => {
     sistem,
     started,
     idMaster,
-});
+  });
 
   return res.status(200).send({
     type: 'success',

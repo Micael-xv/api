@@ -1,5 +1,4 @@
-/* eslint-disable quotes */
-import Elemento from "../models/Elemento";
+import Elemento from '../models/Elemento';
 
 const get = async (req, res) => {
   try {
@@ -41,7 +40,9 @@ const get = async (req, res) => {
 };
 
 const create = async (dados, res) => {
-  const { name, descricao, img, publico, idUsuario } = dados;
+  const {
+    name, descricao, img, publico, idUsuario,
+  } = dados;
 
   const response = await Elemento.create({
     name,
@@ -49,7 +50,7 @@ const create = async (dados, res) => {
     img,
     publico,
     idUsuario,
-});
+  });
 
   return res.status(200).send({
     type: 'success',

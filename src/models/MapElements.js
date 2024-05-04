@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/config';
 import Maps from './Maps';
+import Elemento from './Elemento';
 
 const MapElements = sequelize.define(
   'mapelements',
@@ -28,6 +29,10 @@ const MapElements = sequelize.define(
       type: DataTypes.NUMBER,
       allowNull: false,
     },
+    rotate: {
+      type: DataTypes.NUMBER,
+      allowNull: false,
+    },
   },
   {
     freezeTableName: true,
@@ -37,13 +42,13 @@ const MapElements = sequelize.define(
   },
 
 );
-MapElements.belongsTo(MapElements, {
+Elemento.belongsTo(Elemento, {
   as: 'elemento',
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {
-    field: 'idMapElements',
-    name: 'idMapElementss',
+    field: 'idElemento',
+    name: 'idMapElement',
     allowNull: false,
   },
 });

@@ -59,7 +59,7 @@ Npcs.belongsTo(MapElements, {
   onUpdate: 'no action',
   foreignKey: {
     field: 'map_element',
-    name: 'mapElement',
+    name: 'idmapElement',
     allowNull: false,
   },
 });

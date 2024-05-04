@@ -41,8 +41,8 @@ Elemento.belongsTo(Usuario, {
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {
-    field: 'id_entrega',
-    name: 'idEntrega',
+    field: 'id_usuario',
+    name: 'idUsuario',
     allowNull: false,
   },
 });

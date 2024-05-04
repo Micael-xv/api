@@ -1,5 +1,5 @@
 /* eslint-disable no-return-assign */
-import Maps from "../models/Maps";
+import Maps from '../models/Maps';
 
 const get = async (req, res) => {
   try {
@@ -41,14 +41,19 @@ const get = async (req, res) => {
 };
 
 const create = async (dados, res) => {
-  const { name, description, cover, idCampaing } = dados;
+  const {
+    name,
+    description,
+    cover,
+    idCampaing,
+  } = dados;
 
   const response = await Maps.create({
     name,
     description,
     cover,
     idCampaing,
-});
+  });
 
   return res.status(200).send({
     type: 'success',

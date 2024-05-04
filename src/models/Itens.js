@@ -19,6 +19,10 @@ const Itens = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    img: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     price: {
       type: DataTypes.FLOAT,
       allowNull: false,
@@ -42,8 +46,8 @@ Itens.belongsTo(Usuario, {
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {
-    field: 'id_entrega',
-    name: 'idEntrega',
+    field: 'creator',
+    name: 'idCreator',
     allowNull: false,
   },
 });

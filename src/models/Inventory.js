@@ -32,7 +32,7 @@ Inventory.belongsTo(Sheets, {
   onUpdate: 'no action',
   foreignKey: {
     field: 'owner',
-    name: 'idSheets',
+    name: 'idOwner',
     allowNull: false,
   },
 });
@@ -42,8 +42,8 @@ Inventory.belongsTo(Itens, {
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {
-    field: 'id_campaigns',
-    name: 'idCampaigns',
+    field: 'item',
+    name: 'idItem',
     allowNull: false,
   },
 });
