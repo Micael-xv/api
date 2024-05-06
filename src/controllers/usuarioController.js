@@ -113,7 +113,7 @@ const destroy = async (req, res) => {
 
     const response = await Usuario.findOne({ where: { id } });
 
-    if (!response) {
+    if (!response) {Usuario
       return res.status(200).send({
         type: 'error',
         message: `Nenhum registro com id ${id} para deletar`,
@@ -186,7 +186,7 @@ const login = async (req, res) => {
     const resposta = await bcrypt.compare(password, passwordHash);
 
     if (resposta) {
-      const token = jwt.sign({ userId: user.id, userName: user.name }, process.env.SECRET_KEY, { algorithm: 'ES256', exp: '1h' });
+      const token = jwt.sign({ userId: user.id, userName: user.name }, process.env.SECRET_KEY, { expiresIn: '1h' });
       return res.status(200).send({
         token,
       });
@@ -196,6 +196,7 @@ const login = async (req, res) => {
       message: 'Usuario ou senha inválidos!',
     });
   } catch (error) {
+    console.log(error.message);
     return res.status(500).send({
       message: 'Ops!',
       response: error.message,

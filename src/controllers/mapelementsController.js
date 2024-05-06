@@ -42,24 +42,24 @@ const get = async (req, res) => {
 
 const create = async (dados, res) => {
   const {
-    posicaoX,
-    posicaoY,
+    posicaox,
+    posicaoy,
     altura,
     largura,
     zindex,
     rotate,
-    idElementos,
+    idMapElement,
     idMap,
   } = dados;
 
   const response = await MapElements.create({
-    posicaoX,
-    posicaoY,
+    posicaox,
+    posicaoy,
     altura,
     largura,
     zindex,
     rotate,
-    idElementos,
+    idMapElement,
     idMap,
   });
 
