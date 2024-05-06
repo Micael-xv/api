@@ -46,7 +46,7 @@ const create = async (dados, res) => {
     img,
     price,
     publicos,
-    creator,
+    idCreator,
   } = dados;
 
   const response = await Itens.create({
@@ -55,7 +55,7 @@ const create = async (dados, res) => {
     img,
     price,
     publicos,
-    creator,
+    idCreator,
   });
 
   return res.status(200).send({

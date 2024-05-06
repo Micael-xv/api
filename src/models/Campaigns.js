@@ -31,7 +31,7 @@ const Campaigns = sequelize.define(
   },
   {
     freezeTableName: true,
-    timestamps: true,
+    timestamps: false,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
   },
@@ -39,11 +39,11 @@ const Campaigns = sequelize.define(
 );
 
 Campaigns.belongsTo(Usuario, {
-  as: 'idMaster',
+  as: 'usuario',
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {
-    field: 'idMaster',
+    field: 'idmaster',
     name: 'idMasterUser',
     allowNull: false,
   },

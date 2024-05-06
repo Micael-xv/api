@@ -12,11 +12,11 @@ const MapElements = sequelize.define(
       autoIncrement: true,
     },
 
-    posicaoX: {
+    posicaox: {
       type: DataTypes.NUMBER,
       allowNull: false,
     },
-    posicaoY: {
+    posicaoy: {
       type: DataTypes.NUMBER,
       allowNull: false,
     },
@@ -36,18 +36,18 @@ const MapElements = sequelize.define(
   },
   {
     freezeTableName: true,
-    timestamps: true,
+    timestamps: false,
     createdAt: 'created_at',
     updatedAt: 'createdAt',
   },
 
 );
-Elemento.belongsTo(Elemento, {
+MapElements.belongsTo(Elemento, {
   as: 'elemento',
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {
-    field: 'idElemento',
+    field: 'idelemento',
     name: 'idMapElement',
     allowNull: false,
   },

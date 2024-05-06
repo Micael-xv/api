@@ -22,7 +22,7 @@ const Sheets = sequelize.define(
       allowNull: false,
     },
     hp: {
-      type: DataTypes.Number,
+      type: DataTypes.NUMBER,
       allowNull: false,
     },
     shild: {
@@ -54,7 +54,7 @@ const Sheets = sequelize.define(
   },
   {
     freezeTableName: true,
-    timestamps: true,
+    timestamps: false,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
   },

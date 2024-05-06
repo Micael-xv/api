@@ -3,8 +3,7 @@ import Elemento from '../models/Elemento';
 const get = async (req, res) => {
   try {
     const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
-
-    if (!id) {
+    if (id === null) {
       const response = await Elemento.findAll({
         order: [['id', 'asc']],
       });

@@ -1,4 +1,4 @@
-import inventoryController from "../controllers/inventoryController";
+import inventoryController from '../controllers/inventoryController';
 
 export default (app) => {
   app.post('/inventory/persist', inventoryController.persist);

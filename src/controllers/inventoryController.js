@@ -1,12 +1,11 @@
-/* eslint-disable no-return-assign */
-import Itens from '../models/Itens';
+import Inventory from '../models/Inventory';
 
 const get = async (req, res) => {
   try {
     const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
 
     if (!id) {
-      const response = await Itens.findAll({
+      const response = await Inventory.findAll({
         order: [['id', 'asc']],
       });
       return res.status(200).send({
@@ -16,7 +15,7 @@ const get = async (req, res) => {
       });
     }
 
-    const response = await Itens.findOne({ where: { id } });
+    const response = await Inventory.findOne({ where: { id } });
 
     if (!response) {
       return res.status(200).send({
@@ -41,12 +40,12 @@ const get = async (req, res) => {
 };
 
 const create = async (dados, res) => {
-  const { amount, owner, item } = dados;
+  const { amount, idOwner, idItem } = dados;
 
-  const response = await Itens.create({
+  const response = await Inventory.create({
     amount,
-    owner,
-    item,
+    idOwner,
+    idItem,
   });
 
   return res.status(200).send({
@@ -57,7 +56,7 @@ const create = async (dados, res) => {
 };
 
 const update = async (id, dados, res) => {
-  const response = await Itens.findOne({ where: { id } });
+  const response = await Inventory.findOne({ where: { id } });
 
   if (!response) {
     return res.status(200).send({
@@ -106,7 +105,7 @@ const destroy = async (req, res) => {
       });
     }
 
-    const response = await Itens.findOne({ where: { id } });
+    const response = await Inventory.findOne({ where: { id } });
 
     if (!response) {
       return res.status(200).send({

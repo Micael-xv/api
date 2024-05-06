@@ -30,7 +30,7 @@ const Elemento = sequelize.define(
   },
   {
     freezeTableName: true,
-    timestamps: true,
+    timestamps: false,
     createdAt: 'created_at',
     updatedAt: 'createdAt',
   },
@@ -41,7 +41,7 @@ Elemento.belongsTo(Usuario, {
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {
-    field: 'id_usuario',
+    field: 'usuario',
     name: 'idUsuario',
     allowNull: false,
   },

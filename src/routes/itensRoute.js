@@ -1,4 +1,4 @@
-import itensController from "../controllers/itensController";
+import itensController from '../controllers/itensController';
 
 export default (app) => {
   app.post('/itens/persist', itensController.persist);

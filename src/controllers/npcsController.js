@@ -1,11 +1,11 @@
-import Maps from '../models/Maps';
+import Npcs from '../models/Npcs';
 
 const get = async (req, res) => {
   try {
     const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
 
     if (!id) {
-      const response = await Maps.findAll({
+      const response = await Npcs.findAll({
         order: [['id', 'asc']],
       });
       return res.status(200).send({
@@ -15,7 +15,7 @@ const get = async (req, res) => {
       });
     }
 
-    const response = await Maps.findOne({ where: { id } });
+    const response = await Npcs.findOne({ where: { id } });
 
     if (!response) {
       return res.status(200).send({
@@ -42,7 +42,7 @@ const get = async (req, res) => {
 const create = async (dados, res) => {
   const { name, age, gender, appearence, temper, idCampaign, mapElement } = dados;
 
-  const response = await Maps.create({
+  const response = await Npcs.create({
     name,
     age,
     gender,
@@ -60,7 +60,7 @@ const create = async (dados, res) => {
 };
 
 const update = async (id, dados, res) => {
-  const response = await Maps.findOne({ where: { id } });
+  const response = await Npcs.findOne({ where: { id } });
 
   if (!response) {
     return res.status(200).send({
@@ -109,7 +109,7 @@ const destroy = async (req, res) => {
       });
     }
 
-    const response = await Maps.findOne({ where: { id } });
+    const response = await Npcs.findOne({ where: { id } });
 
     if (!response) {
       return res.status(200).send({
