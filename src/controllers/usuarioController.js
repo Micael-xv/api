@@ -43,7 +43,7 @@ const get = async (req, res) => {
 
 const create = async (dados, res) => {
   const {
-    fistname, lastname, email, number, passwordHash 
+    fistname, lastname, email, number, passwordHash
   } = dados;
 
   const response = await Usuario.create({
@@ -113,7 +113,7 @@ const destroy = async (req, res) => {
 
     const response = await Usuario.findOne({ where: { id } });
 
-    if (!response) {Usuario
+    if (!response) {
       return res.status(200).send({
         type: 'error',
         message: `Nenhum registro com id ${id} para deletar`,
@@ -139,7 +139,7 @@ const destroy = async (req, res) => {
 const register = async (req, res) => {
   try {
     const {
-      email, password, firstname, lastname, number,
+      email, password, cargo, firstname, lastname, number,
     } = req.body;
     const response = await Usuario.findOne({
       where: {
@@ -153,6 +153,7 @@ const register = async (req, res) => {
     const resposta = await Usuario.create({
       firstname,
       lastname,
+      cargo,
       number,
       email,
       passwordHash,
@@ -182,7 +183,7 @@ const login = async (req, res) => {
     }
 
     const passwordHash = user.passwordHash;
-
+    console.log(password + ' ' + passwordHash);
     const resposta = await bcrypt.compare(password, passwordHash);
 
     if (resposta) {

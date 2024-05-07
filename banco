@@ -2,6 +2,7 @@ create table usuario(
     id serial primary key,
     firstname varchar,
     lastname varchar,
+    cargo varchar not null,
     email varchar,
     number int,
     password_hash text

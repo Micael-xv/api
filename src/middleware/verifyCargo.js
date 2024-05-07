@@ -27,9 +27,10 @@ export default async (req, res, next) => {
         id: decodedToken.userId,
       },
     });
-    if (!usuario) {
+    console.log(usuario);
+    if (usuario.cargo != 'Maneger') {
       return res.status(401).send({
-        message: 'Conta incorreta!',
+        message: 'Acesso não autorizado!',
       });
     }
     next();
