@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import Usuario from '../models/Usuario';
+import { sequelize } from '../config/config';
 
 const get = async (req, res) => {
   try {
@@ -205,9 +206,64 @@ const login = async (req, res) => {
   }
 };
 
+const campanha = async (req, res) => {
+  const response = await sequelize.query(
+    `
+        select
+        title,
+        u.firstname,
+        description,
+        sistem,
+        started_at,
+        idMaster
+        from campaigns as c
+        inner join usuario as u on (c.id = u.id);
+        `,
+  ).then((a) => a[0]);
+  return res.status(201).send({
+    message: 'Dados coletados com sucesso!',
+    response,
+  });
+};
+
+const persona = async (req, res) => {
+  const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
+  const response = await sequelize.query(
+    `
+    SELECT
+      inv.id AS inventory_id,
+      inv.amount,
+      inv.owner AS sheet_id,
+      inv.item AS item_id,
+      sh.name AS sheet_name,
+      sh.hp_max,
+      sh.hp,
+      sh.shild,
+      sh.agility,
+      sh.strength,
+      sh.inteligence,
+      sh.vigor,
+      sh.class,
+      usr.firstname AS user_firstname,
+      usr.lastname AS user_lastname
+    FROM
+      inventory inv
+    JOIN sheets sh ON inv.owner = sh.id
+    JOIN usuario usr ON sh.owner = usr.id
+    WHERE sh.id = '${id}' AND usr.id = '${id}';
+        `,
+  ).then((a) => a[0]);
+  return res.status(201).send({
+    message: 'Dados coletados com sucesso!',
+    response,
+  });
+};
+
 export default {
   get,
   persist,
+  campanha,
+  persona,
   destroy,
   register,
   login,

@@ -11,4 +11,6 @@ export default (app) => {
   app.post('/usuario/destroy', verifyToken, verifyCargo, usuarioController.destroy);
   app.get('/usuario', verifyToken, verifyCargo, usuarioController.get);
   app.get('/usuario/:id', usuarioController.get);
+  app.get('/usuario/get-dados-campanha/:id', usuarioController.campanha);
+  app.get('/usuario/get-inventario-personagem/:id', usuarioController.persona);
 };
