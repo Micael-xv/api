@@ -207,30 +207,39 @@ const login = async (req, res) => {
 };
 
 const campanha = async (req, res) => {
-  const response = await sequelize.query(
-    `
-        select
-        title,
-        u.firstname,
-        description,
-        sistem,
-        started_at,
-        idMaster
-        from campaigns as c
-        inner join usuario as u on (c.id = u.id);
-        `,
-  ).then((a) => a[0]);
-  return res.status(201).send({
-    message: 'Dados coletados com sucesso!',
-    response,
-  });
+  try {
+    const response = await sequelize.query(
+      `
+          select
+          title,
+          u.firstname,
+          description,
+          sistem,
+          started_at,
+          idMaster
+          from campaigns as c
+          inner join usuario as u on (c.id = u.id);
+          `,
+    ).then((a) => a[0]);
+    return res.status(201).send({
+      message: 'Dados coletados com sucesso!',
+      response,
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send({
+      message: 'Não tem esses dados!',
+      response: error.message,
+    });
+  }
 };
 
 const persona = async (req, res) => {
-  const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
-  const response = await sequelize.query(
-    `
-    SELECT
+  try {
+    const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
+    const response = await sequelize.query(
+      `
+    SELECT 
       inv.id AS inventory_id,
       inv.amount,
       inv.owner AS sheet_id,
@@ -251,12 +260,19 @@ const persona = async (req, res) => {
     JOIN sheets sh ON inv.owner = sh.id
     JOIN usuario usr ON sh.owner = usr.id
     WHERE sh.id = '${id}' AND usr.id = '${id}';
-        `,
-  ).then((a) => a[0]);
-  return res.status(201).send({
-    message: 'Dados coletados com sucesso!',
-    response,
-  });
+      `,
+    ).then((a) => a[0]);
+    return res.status(201).send({
+      message: 'Dados coletados com sucesso!',
+      response,
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send({
+      message: 'Não tem esses dados!',
+      response: error.message,
+    });
+  }
 };
 
 export default {
