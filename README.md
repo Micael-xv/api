@@ -10,7 +10,7 @@
     POSTGRES_HOST=localhost
     POSTGRES_DB=arni-api
     POSTGRES_USERNAME=postgres
-    POSTGRES_PASSWORD=unochapeco
+    POSTGRES_PASSWORD=
     POSTGRES_PORT=5432
     TOKEN_KEY=arni-api
     API_PORT=3333
